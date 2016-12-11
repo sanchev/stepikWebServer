@@ -1,5 +1,7 @@
 package com.sanchev.dbService;
 
+import com.sanchev.dbService.dao.UsersDAO;
+import com.sanchev.dbService.dataSets.UsersDataSet;
 import org.h2.jdbcx.JdbcDataSource;
 
 import java.sql.Connection;
@@ -11,8 +13,8 @@ public class DBService {
     private final Connection connection;
 
     public DBService() {
-        this.connection = getH2Connection();
-        //this.connection = getMysqlConnection();
+        //this.connection = getH2Connection();
+        this.connection = getMysqlConnection();
     }
 
     private static Connection getMysqlConnection() {
@@ -66,6 +68,42 @@ public class DBService {
             System.out.println("Autocommit: " + connection.getAutoCommit());
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public long addUser(String name) throws DBException {
+        try {
+            connection.setAutoCommit(false);
+            UsersDAO usersDAO = new UsersDAO(connection);
+            usersDAO.createTable();
+            usersDAO.insertUser(name);
+            connection.commit();
+            return usersDAO.getUserId(name);
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ignore) {}
+            throw new DBException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ignore) {}
+        }
+    }
+
+    public void cleanUp() throws DBException {
+        try {
+            new UsersDAO(connection).dropTable();
+        } catch (SQLException e) {
+            throw new DBException(e);
+        }
+    }
+
+    public UsersDataSet getUser(long userId) throws DBException {
+        try {
+            return (new UsersDAO(connection).get(userId));
+        } catch (SQLException e) {
+            throw new DBException(e);
         }
     }
 }
