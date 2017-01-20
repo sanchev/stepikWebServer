@@ -1,7 +1,8 @@
 package com.sanchev.accountServer;
 
+@SuppressWarnings("UnusedDeclaration")
 public interface AccountServerControllerMBean {
-	public void setUsersLimit(int usersLimit);
-	
-	public int getUsersLimit();
+	void setUsersLimit(int usersLimit);
+
+	int getUsersLimit();
 }
