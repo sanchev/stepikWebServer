@@ -1,0 +1,5 @@
+<class type="com.sanchev.resources.DBParametersResource">
+	<name>test</name>
+	<pass>pasword</pass>
+	<user>root</user>
+</class>
