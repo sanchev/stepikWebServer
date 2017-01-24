@@ -1,0 +1,38 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sanchev</groupId>
+	<artifactId>L6.4</artifactId>
+	<version>1.0</version>
+	
+	<packaging>jar</packaging>
+	
+	<properties>
+		<org.apache.maven.plugins.maven-compiler-plugin.version>3.6.0</org.apache.maven.plugins.maven-compiler-plugin.version>
+		<org.codehaus.mojo.exec-maven-plugin.version>1.5.0</org.codehaus.mojo.exec-maven-plugin.version>
+	</properties>
+	
+	<build>
+		<defaultGoal>install</defaultGoal>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${org.codehaus.mojo.exec-maven-plugin.version}</version>
+				<configuration>
+					<mainClass>com.sanchev.App</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
