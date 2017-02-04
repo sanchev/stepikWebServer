@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.sanchev</groupId>
+	<artifactId>HW07</artifactId>
+	<version>1.0</version>
+	
+	<packaging>jar</packaging>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.apache.maven.plugins.maven-compiler-plugin.version>3.6.0</org.apache.maven.plugins.maven-compiler-plugin.version>
+		<org.codehaus.mojo.exec-maven-plugin.version>1.5.0</org.codehaus.mojo.exec-maven-plugin.version>
+		<org.apache.maven.plugins.maven-assembly-plugin.version>3.0.0</org.apache.maven.plugins.maven-assembly-plugin.version>
+	</properties>
+	
+	<build>
+		<defaultGoal>install</defaultGoal>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>	
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>${org.codehaus.mojo.exec-maven-plugin.version}</version>	
+				<configuration>
+					<mainClass>com.sanchev.App</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${org.apache.maven.plugins.maven-assembly-plugin.version}</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<outputDirectory>${basedir}</outputDirectory>
+					<finalName>server</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<archive>
+						<manifest>
+							<mainClass>com.sanchev.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
